@@ -24,3 +24,7 @@ else if (sex == 'k' || sex == 'K')
         Console.WriteLine($"{name}, kobieta lat {age}.");
     }
 }
+else
+    {
+        Console.WriteLine("Wprowadzono niepoprawne dane.");
+    }
