@@ -1,76 +1,43 @@
-﻿// Program sprawdza ilość poszczególnych cyfr znajdujących się w podanej liczbie.
-// np. 12123
-// 0 => 0
-// 1 => 2
-// 2 => 2
-// 3 => 1
-// 4 => 0
-// itd.
+﻿using ChallengeApp;
 
-ulong number = 12897789723460000580;
-string numberAsString = number.ToString();
-char[] numberToLetters = numberAsString.ToArray();
-int counter0 = 0;
-int counter1 = 0;
-int counter2 = 0;
-int counter3 = 0;
-int counter4 = 0;
-int counter5 = 0;
-int counter6 = 0;
-int counter7 = 0;
-int counter8 = 0;
-int counter9 = 0;
+Employee user1 = new Employee("Jan", "Kowalski", 36);
+Employee user2 = new Employee("Adam", "Mickiewicz", 59);
+Employee user3 = new Employee("Andrzej", "Nowak", 23);
+List<Employee> employees = new List<Employee>(){
+    user1,
+    user2,
+    user3
+};
 
-foreach (char letter in numberToLetters)
+user1.AddGrade(1);
+user1.AddGrade(2);
+user1.AddGrade(3);
+user1.AddGrade(2);
+user1.AddGrade(5);
+
+user2.AddGrade(2);
+user2.AddGrade(8);
+user2.AddGrade(2);
+user2.AddGrade(8);
+user2.AddGrade(10);
+
+user3.AddGrade(3);
+user3.AddGrade(2);
+user3.AddGrade(7);
+user3.AddGrade(9);
+user3.AddGrade(3);
+
+int maxResult = -1;
+Employee employeeWithMaxResult = null;
+foreach (Employee employee in employees)
 {
-    if (letter == '0')
+    if (employee.Score > maxResult)
     {
-        counter0++;
-    }
-    else if (letter == '1')
-    {
-        counter1++;
-    }
-    else if (letter == '2')
-    {
-        counter2++;
-    }
-    else if (letter == '3')
-    {
-        counter3++;
-    }
-    else if (letter == '4')
-    {
-        counter4++;
-    }
-    else if (letter == '5')
-    {
-        counter5++;
-    }
-    else if (letter == '6')
-    {
-        counter6++;
-    }
-    else if (letter == '7')
-    {
-        counter7++;
-    }
-    else if (letter == '8')
-    {
-        counter8++;
-    }
-    else if (letter == '9')
-    {
-        counter9++;
+        employeeWithMaxResult = employee;
+        maxResult = employee.Score;
     }
 }
-Console.WriteLine($"0 => {counter0}");
-Console.WriteLine($"1 => {counter1}");
-Console.WriteLine($"2 => {counter2}");
-Console.WriteLine($"3 => {counter3}");
-Console.WriteLine($"4 => {counter4}");
-Console.WriteLine($"5 => {counter5}");
-Console.WriteLine($"6 => {counter6}");
-Console.WriteLine($"7 => {counter7}");
-Console.WriteLine($"8 => {counter8}");
-Console.WriteLine($"9 => {counter9}");
+Console.WriteLine("The best employee is: ");
+Console.Write(employeeWithMaxResult.Name);
+Console.Write($" {employeeWithMaxResult.Surname}: ");
+Console.Write($"{employeeWithMaxResult.Score} pts");
