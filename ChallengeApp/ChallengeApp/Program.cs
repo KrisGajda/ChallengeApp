@@ -22,7 +22,7 @@ user2.AddGrade(8);
 user2.AddGrade(10);
 
 user3.AddGrade(3);
-user3.AddGrade(2);
+user3.AddGrade(7);
 user3.AddGrade(7);
 user3.AddGrade(9);
 user3.AddGrade(3);
