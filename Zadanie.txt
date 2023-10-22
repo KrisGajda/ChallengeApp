@@ -1,0 +1,8 @@
+1. Aplikacja konsolowa pobiera oceny pracownika i oblicza statystyki -> ocena min, max, średnia.
+Oceny to liczby zmiennoprzecinkowe w zakresie 0-10.
+2. Aplikacja umożliwia dodanie kolejnych pracowników (opcja dodaj pracownika, wybierz pracownika, dodaj ocenę)
+3. Aplikacja umożliwia wyświetlenie listy pracowników oraz wybór konkretnego pracownika,
+któremu przyznawane są oceny.
+4. Opcje do wyboru: Pokaż listę pracowników, wybierz pracownika i dodaj ocenę (czy dodać kolejną ocenę? T/N), pokaż statystyki
+wybranego pracownika. Indeks pracownika na liście to jego "id" służące do jego wyboru
+5. Nowa opcja - wypisz ranking pracowników wg średniej oceny.

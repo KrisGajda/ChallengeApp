@@ -1,6 +1,6 @@
 namespace ChallengeApp.Tests
 {
-    public class Tests
+    public class EmployeeTest
     {
         [Test]
         public void WhenEmployeeCollectThreePositivePoints_ShouldReturnCorrectSumOfPoints()
