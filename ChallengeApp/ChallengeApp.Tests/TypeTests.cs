@@ -36,14 +36,14 @@
         public void GetEmployeeShouldReturnDifferentObjects()
         {
             // arrange
-            var user1 = GetEmployee("Adam", "Adamowski", 36);
-            var user2 = GetEmployee("Adam", "Adamowski", 36);
+            var user1 = GetEmployee("Adam", "Adamowski");
+            var user2 = GetEmployee("Adam", "Adamowski");
             // assert
             Assert.AreNotEqual(user1, user2);
         }
-        private Employee GetEmployee(string name, string surname, int age)
+        private Employee GetEmployee(string name, string surname)
         {
-            return new Employee(name, surname, age);
+            return new Employee(name, surname);
         }
     }
 }
