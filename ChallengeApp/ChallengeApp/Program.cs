@@ -7,11 +7,11 @@ List<Employee> employees = new List<Employee>(){
     employee1,
 };
 
-employee1.AddGrade(1);
+employee1.AddGrade(1.2);
+employee1.AddGrade('2');
+employee1.AddGrade(300);
 employee1.AddGrade(2);
-employee1.AddGrade(3);
-employee1.AddGrade(2);
-employee1.AddGrade(5);
+employee1.AddGrade(9.8f);
 
 var statistics1 = employee1.GetStatistics();
 
