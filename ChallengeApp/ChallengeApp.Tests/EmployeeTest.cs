@@ -7,13 +7,13 @@ namespace ChallengeApp.Tests
         {
             // arrange
             var employee1 = new Employee("Barry", "White");
-            employee1.AddGrade(-4);
             employee1.AddGrade(4);
-            employee1.AddGrade(-9);
+            employee1.AddGrade(5);
+            employee1.AddGrade(9);
             // act
             var statistics = employee1.GetStatistics();
             // assert
-            Assert.AreEqual(-3, statistics.Average);
+            Assert.AreEqual(6, statistics.Average);
         }
 
         [Test]
@@ -35,13 +35,13 @@ namespace ChallengeApp.Tests
         {
             // arrange
             var employee1 = new Employee("Barry", "White");
-            employee1.AddGrade(-4);
-            employee1.AddGrade(4);
-            employee1.AddGrade(-9);
+            employee1.AddGrade(10);
+            employee1.AddGrade(40);
+            employee1.AddGrade(90);
             // act
             var statistics = employee1.GetStatistics();
             // assert
-            Assert.AreEqual(-9, statistics.Min);
+            Assert.AreEqual(10, statistics.Min);
         }
 
         [Test]
@@ -49,13 +49,13 @@ namespace ChallengeApp.Tests
         {
             // arrange
             var employee1 = new Employee("Barry", "White");
-            employee1.AddGrade(-4);
-            employee1.AddGrade(4);
-            employee1.AddGrade(-9);
+            employee1.AddGrade(60);
+            employee1.AddGrade(50);
+            employee1.AddGrade(40);
             // act
             var statistics = employee1.GetStatistics();
             // assert
-            Assert.AreEqual(4, statistics.Max);
+            Assert.AreEqual(60, statistics.Max);
         }
 
         [Test]
@@ -63,27 +63,27 @@ namespace ChallengeApp.Tests
         {
             // arrange
             var employee1 = new Employee("Barry", "White");
-            employee1.AddGrade(4);
-            employee1.AddGrade(5);
-            employee1.AddGrade(3);
+            employee1.AddGrade(40);
+            employee1.AddGrade(50);
+            employee1.AddGrade(30);
             // act
             var employeePointsSum = employee1.Score;
             // assert
-            Assert.AreEqual(12, employeePointsSum);
+            Assert.AreEqual(120, employeePointsSum);
         }
 
         [Test]
-        public void WhenEmployeeCollectSomeMinusPoints_ShouldReturnCorrectSumOfPoints()
+        public void ReturnCorrectEmployeeFinalGrade_C()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
-            employee1.AddGrade(4);
-            employee1.AddGrade(-5);
-            employee1.AddGrade(-3);
+            var employee = new Employee();
+            employee.AddGrade(50);
+            employee.AddGrade(50);
+            employee.AddGrade(50);
             // act
-            var employeePointsSum = employee1.Score;
+            var statistics = employee.GetStatistics();
             // assert
-            Assert.AreEqual(-4, employeePointsSum);
+            Assert.AreEqual('C', statistics.AverageLetter);
         }
     }
 }

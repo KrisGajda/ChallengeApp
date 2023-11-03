@@ -10,6 +10,11 @@ namespace ChallengeApp
             this.Name = name;
             this.Surname = surname;
         }
+        public Employee()
+        {
+            this.Name = "DefaultName";
+            this.Surname = "DefaultSurname";
+        }
         public string Name { get; private set; }
         public string Surname { get; private set; }
         public float Score { get; private set; }
@@ -30,7 +35,7 @@ namespace ChallengeApp
         {
             if (float.TryParse(grade, out float result))
             {
-                this.grades.Add(result);
+                AddGrade(result);
             }
             else
             {
@@ -58,11 +63,35 @@ namespace ChallengeApp
 
         public void AddGrade(char grade)
         {
-            string stringGrade = Char.ToString(grade);
-            AddGrade(stringGrade);
+            switch (grade)
+            {
+                case 'a':
+                case 'A':
+                    AddGrade(100);
+                    break;
+                case 'b':
+                case 'B':
+                    AddGrade(80);
+                    break;
+                case 'c':
+                case 'C':
+                    AddGrade(60);
+                    break;
+                case 'd':
+                case 'D':
+                    AddGrade(40);
+                    break;
+                case 'e':
+                case 'E':
+                    AddGrade(20);
+                    break;
+                default:
+                    Console.WriteLine("Wrong letter");
+                    break;
+            }
         }
 
-        public Statistics GetStatisticsWithForEach()
+        public Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Min = float.MaxValue;
@@ -75,57 +104,25 @@ namespace ChallengeApp
                 statistics.Average += grade;
             }
             statistics.Average /= this.grades.Count;
-            return statistics;
-        }
-        public Statistics GetStatisticsWithFor()
-        {
-            var statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-            statistics.Average = 0;
-            for (var i = 0; i < this.grades.Count; i++)
+            switch (statistics.Average)
             {
-                statistics.Max = Math.Max(statistics.Max, this.grades[i]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[i]);
-                statistics.Average += this.grades[i];
+                case var average when average >= 80:
+                    statistics.AverageLetter = 'A';
+                    break;
+                case var average when average >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+                    statistics.AverageLetter = 'E';
+                    break;
             }
-            statistics.Average /= this.grades.Count;
             return statistics;
         }
-        public Statistics GetStatisticsWithDoWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-            statistics.Average = 0;
-            var i = 0;
-            do
-            {
-                statistics.Max = Math.Max(statistics.Max, this.grades[i]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[i]);
-                statistics.Average += this.grades[i];
-                i++;
-            } while (i < this.grades.Count);
-            statistics.Average /= this.grades.Count;
-            return statistics;       
-        }
-        public Statistics GetStatisticsWithWhile()
-        {
-            var statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-            statistics.Average = 0;
-            var i = 0;
-            while (i < this.grades.Count)
-            {
-                statistics.Max = Math.Max(statistics.Max, this.grades[i]);
-                statistics.Min = Math.Min(statistics.Min, this.grades[i]);
-                statistics.Average += this.grades[i];
-                i++;
-            }
-            statistics.Average /= this.grades.Count;
-            return statistics;
-        }
-
     }
 }
