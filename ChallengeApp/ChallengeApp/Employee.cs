@@ -27,7 +27,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine($"Invalid grade value: {grade}. Value not added.");
+                throw new Exception($"invalid grade value: {grade}. Value not added.");
             }
         }
 
@@ -39,7 +39,7 @@ namespace ChallengeApp
             }
             else
             {
-                Console.WriteLine("String is not float!");
+                throw new Exception("string is not float!");
             }
         }
 
@@ -86,8 +86,7 @@ namespace ChallengeApp
                     AddGrade(20);
                     break;
                 default:
-                    Console.WriteLine("Wrong letter");
-                    break;
+                    throw new Exception("wrong letter");
             }
         }
 
