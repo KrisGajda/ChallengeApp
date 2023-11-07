@@ -1,22 +1,38 @@
-﻿using System.Diagnostics;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
-    public class Employee
+    public class Employee : Person
     {
         List<float> grades = new List<float>();
+        public Employee(string name, string surname, char sex, int age)
+            : base(name, surname)
+        {
+            this.Sex = sex;
+            this.Age = age;
+        }
         public Employee(string name, string surname)
-        {
-            this.Name = name;
-            this.Surname = surname;
-        }
+            : this(name, surname, '-', 0){}
         public Employee()
+            : this("NoName", "NoSurname", '-', 0){}
+        private char sex;
+        public char Sex 
         {
-            this.Name = "DefaultName";
-            this.Surname = "DefaultSurname";
+            get
+            {
+                return sex;
+            }
+            set
+            {
+                if (value == 'K' || value == 'M')
+                    sex = value;
+                else if (value =='-')
+                    sex = value;
+                else
+                {
+                    throw new Exception("Podaj płeć \"K\" (kobieta) lub \"M\" (mężczyzna) lub \"-\"");
+                }
+            }
         }
-        public string Name { get; private set; }
-        public string Surname { get; private set; }
+        public int Age { get; private set; }
         public float Score { get; private set; }
         public void AddGrade(float grade)
         {
@@ -32,10 +48,39 @@ namespace ChallengeApp
         }
 
         public void AddGrade(string grade)
+
         {
             if (float.TryParse(grade, out float result))
             {
                 AddGrade(result);
+            }
+            else if (char.TryParse(grade, out char charResult))
+            {
+                switch (charResult)
+                {
+                    case 'a':
+                    case 'A':
+                        AddGrade(100);
+                        break;
+                    case 'b':
+                    case 'B':
+                        AddGrade(80);
+                        break;
+                    case 'c':
+                    case 'C':
+                        AddGrade(60);
+                        break;
+                    case 'd':
+                    case 'D':
+                        AddGrade(40);
+                        break;
+                    case 'e':
+                    case 'E':
+                        AddGrade(20);
+                        break;
+                    default:
+                        throw new Exception("unexpected letter");
+                }
             }
             else
             {
@@ -59,35 +104,6 @@ namespace ChallengeApp
         {
             float gradeValue = (float)grade;
             AddGrade(gradeValue);
-        }
-
-        public void AddGrade(char grade)
-        {
-            switch (grade)
-            {
-                case 'a':
-                case 'A':
-                    AddGrade(100);
-                    break;
-                case 'b':
-                case 'B':
-                    AddGrade(80);
-                    break;
-                case 'c':
-                case 'C':
-                    AddGrade(60);
-                    break;
-                case 'd':
-                case 'D':
-                    AddGrade(40);
-                    break;
-                case 'e':
-                case 'E':
-                    AddGrade(20);
-                    break;
-                default:
-                    throw new Exception("wrong letter");
-            }
         }
 
         public Statistics GetStatistics()
