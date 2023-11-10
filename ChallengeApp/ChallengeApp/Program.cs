@@ -4,7 +4,7 @@ Console.WriteLine("Witaj w programie do oceny pracowników!");
 Console.WriteLine("---------------------------------------");
 Console.WriteLine();
 
-Employee employee1 = new Employee();
+Supervisor employee1 = new Supervisor();
 //List<Employee> employees = new List<Employee>(){};
 while (true)
 {
