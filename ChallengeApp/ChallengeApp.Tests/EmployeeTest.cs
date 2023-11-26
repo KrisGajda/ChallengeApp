@@ -6,7 +6,7 @@ namespace ChallengeApp.Tests
         public void CheckIfMethodGetStatisticsCountsCorrectAverageGrade()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
+            var employee1 = new EmployeeInMemory("Barry", "White");
             employee1.AddGrade(4);
             employee1.AddGrade(5);
             employee1.AddGrade(9);
@@ -20,7 +20,7 @@ namespace ChallengeApp.Tests
         public void CheckIfMethodGetStatisticsCountsCorrectAverageGradeWhenAverageValueIsFloatType()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
+            var employee1 = new EmployeeInMemory("Barry", "White");
             employee1.AddGrade(3);
             employee1.AddGrade(4);
             employee1.AddGrade(3);
@@ -34,7 +34,7 @@ namespace ChallengeApp.Tests
         public void CheckIfMethodGetStatisticsCountsCorrectMinimumGrade()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
+            var employee1 = new EmployeeInMemory("Barry", "White");
             employee1.AddGrade(10);
             employee1.AddGrade(40);
             employee1.AddGrade(90);
@@ -48,7 +48,7 @@ namespace ChallengeApp.Tests
         public void CheckIfMethodGetStatisticsCountsCorrectMaximumGrade()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
+            var employee1 = new EmployeeInMemory("Barry", "White");
             employee1.AddGrade(60);
             employee1.AddGrade(50);
             employee1.AddGrade(40);
@@ -62,7 +62,7 @@ namespace ChallengeApp.Tests
         public void WhenEmployeeCollectThreePositivePoints_ShouldReturnCorrectSumOfPoints()
         {
             // arrange
-            var employee1 = new Employee("Barry", "White");
+            var employee1 = new EmployeeInMemory("Barry", "White");
             employee1.AddGrade(40);
             employee1.AddGrade(50);
             employee1.AddGrade(30);
@@ -76,7 +76,7 @@ namespace ChallengeApp.Tests
         public void ReturnCorrectEmployeeFinalGrade_C()
         {
             // arrange
-            var employee = new Employee();
+            var employee = new EmployeeInMemory();
             employee.AddGrade(50);
             employee.AddGrade(50);
             employee.AddGrade(50);

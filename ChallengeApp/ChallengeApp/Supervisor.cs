@@ -1,7 +1,8 @@
 ﻿namespace ChallengeApp
 {
-    public class Supervisor : IEmployee
+    public class Supervisor : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
         List<float> grades = new List<float>();
         public Supervisor(string name, string surname, char sex, int age)
         {
@@ -36,7 +37,7 @@
         public int Age { get; private set; }
         public float Score { get; private set; }
 
-        public void AddGrade(string grade)
+        public override void AddGrade(string grade)
 
         {
             if (grade.Contains('-') || grade.Contains('+'))
@@ -126,37 +127,40 @@
                 throw new Exception("unexpected grade");
             }
         }
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
-                this.Score += grade;
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
                 throw new Exception($"invalid grade value: {grade}. Value not added.");
             }
         }
-        public void AddGrade(double grade)
+        public override void AddGrade(double grade)
         {
             string gradeValue = grade.ToString();
             AddGrade(gradeValue);
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
             string gradeValue = grade.ToString();
             AddGrade(gradeValue);
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             string gradeValue = grade.ToString();
             AddGrade(gradeValue);
         }
 
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             var statistics = new Statistics();
             statistics.Min = float.MaxValue;

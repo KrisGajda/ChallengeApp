@@ -2,6 +2,8 @@
 {
     public class EmployeeInMemory : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
+
         List<float> grades = new List<float>();
         public EmployeeInMemory()
             : base() { }
@@ -14,6 +16,10 @@
             if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
             else
             {
@@ -32,23 +38,23 @@
                 {
                     case 'a':
                     case 'A':
-                        AddGrade(100);
+                        AddGrade(100f);
                         break;
                     case 'b':
                     case 'B':
-                        AddGrade(80);
+                        AddGrade(80f);
                         break;
                     case 'c':
                     case 'C':
-                        AddGrade(60);
+                        AddGrade(60f);
                         break;
                     case 'd':
                     case 'D':
-                        AddGrade(40);
+                        AddGrade(40f);
                         break;
                     case 'e':
                     case 'E':
-                        AddGrade(20);
+                        AddGrade(20f);
                         break;
                     default:
                         throw new Exception("unexpected letter");

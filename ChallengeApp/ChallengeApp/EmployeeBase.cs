@@ -1,9 +1,9 @@
-﻿using System.Xml.Linq;
-
-namespace ChallengeApp
+﻿namespace ChallengeApp
 {
     public abstract class EmployeeBase : IEmployee
     {
+        public delegate void GradeAddedDelegate(object sender, EventArgs args);
+        public abstract event GradeAddedDelegate GradeAdded;
         public EmployeeBase(string name, string surname, char sex, int age)
         {
             this.Name = name;
@@ -34,8 +34,8 @@ namespace ChallengeApp
                 }
             }
         }
+        
         public int Age { get; protected set; }
-        public float Score { get; protected set; }
         public abstract void AddGrade(float grade);
         public abstract void AddGrade(string grade);
         public abstract void AddGrade(double grade);

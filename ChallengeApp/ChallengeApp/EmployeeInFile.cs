@@ -2,6 +2,7 @@
 {
     public class EmployeeInFile : EmployeeBase
     {
+        public override event GradeAddedDelegate GradeAdded;
         private const string fileName = "grades.txt";
         public EmployeeInFile()
             : base() { }
@@ -15,6 +16,10 @@
             using (var writer = File.AppendText(fileName))
             {
                 writer.WriteLine(grade);
+            }
+            if (GradeAdded != null)
+            {
+                GradeAdded(this, new EventArgs());
             }
         }
 
@@ -30,23 +35,23 @@
                 {
                     case 'a':
                     case 'A':
-                        AddGrade(100);
+                        AddGrade(100f);
                         break;
                     case 'b':
                     case 'B':
-                        AddGrade(80);
+                        AddGrade(80f);
                         break;
                     case 'c':
                     case 'C':
-                        AddGrade(60);
+                        AddGrade(60f);
                         break;
                     case 'd':
                     case 'D':
-                        AddGrade(40);
+                        AddGrade(40f);
                         break;
                     case 'e':
                     case 'E':
-                        AddGrade(20);
+                        AddGrade(20f);
                         break;
                     default:
                         throw new Exception("unexpected letter");
@@ -77,11 +82,11 @@
 
         public override Statistics GetStatistics()
         {
-            var gradesFromFile = this.readGradesFromFile();
-            var result = this.countStatistics(gradesFromFile);
+            var gradesFromFile = this.ReadGradesFromFile();
+            var result = this.CountStatistics(gradesFromFile);
             return result;
         }
-        private List<float> readGradesFromFile()
+        private List<float> ReadGradesFromFile()
         {
             var grades = new List<float>();
             if (File.Exists(fileName))
@@ -98,7 +103,7 @@
             }
             return grades;
         }
-        private Statistics countStatistics(List<float> grades)
+        private Statistics CountStatistics(List<float> grades)
         {
             var statistics = new Statistics();
             statistics.Min = float.MaxValue;
