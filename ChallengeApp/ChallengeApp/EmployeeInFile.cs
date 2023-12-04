@@ -13,13 +13,20 @@
 
         public override void AddGrade(float grade)
         {
-            using (var writer = File.AppendText(fileName))
+            if (grade >= 0 && grade <= 100)
             {
-                writer.WriteLine(grade);
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                }
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
             }
-            if (GradeAdded != null)
+            else
             {
-                GradeAdded(this, new EventArgs());
+                throw new Exception("invalid grade value");
             }
         }
 
@@ -59,7 +66,7 @@
             }
             else
             {
-                throw new Exception("string is not float!");
+                throw new Exception("text is not a number!");
             }
         }
 
@@ -82,9 +89,13 @@
 
         public override Statistics GetStatistics()
         {
+            var statistics = new Statistics();
             var gradesFromFile = this.ReadGradesFromFile();
-            var result = this.CountStatistics(gradesFromFile);
-            return result;
+            foreach (var grade in gradesFromFile)
+            {
+                statistics.AddGrade(grade);
+            }
+            return statistics;
         }
         private List<float> ReadGradesFromFile()
         {
@@ -102,39 +113,6 @@
                 }
             }
             return grades;
-        }
-        private Statistics CountStatistics(List<float> grades)
-        {
-            var statistics = new Statistics();
-            statistics.Min = float.MaxValue;
-            statistics.Max = float.MinValue;
-            statistics.Average = 0;
-            foreach (var grade in grades)
-            {
-                statistics.Max = Math.Max(statistics.Max, grade);
-                statistics.Min = Math.Min(statistics.Min, grade);
-                statistics.Average += grade;
-            }
-            statistics.Average /= grades.Count;
-            switch (statistics.Average)
-            {
-                case var average when average >= 80:
-                    statistics.AverageLetter = 'A';
-                    break;
-                case var average when average >= 60:
-                    statistics.AverageLetter = 'B';
-                    break;
-                case var average when average >= 40:
-                    statistics.AverageLetter = 'C';
-                    break;
-                case var average when average >= 20:
-                    statistics.AverageLetter = 'D';
-                    break;
-                default:
-                    statistics.AverageLetter = 'E';
-                    break;
-            }
-            return statistics;
         }
     }
 }
